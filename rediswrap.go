@@ -8,7 +8,11 @@ import (
 )
 
 type Wrapper struct {
-	redisClient redis.Client
+	redisClient *redis.Client
+}
+
+func New(redisClient *redis.Client) *Wrapper{
+	return &Wrapper{redisClient: redisClient}
 }
 
 func (w *Wrapper) Set(ctx context.Context, key string, value interface{}, expiration time.Duration) *redis.StatusCmd {
